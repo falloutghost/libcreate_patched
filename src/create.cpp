@@ -463,15 +463,6 @@ namespace create {
     sideMotorPower = roundf(side * 127);
     vacuumMotorPower = roundf(vacuum * 127);
 
-    if (model.getVersion() == V_1) {
-        uint8_t cmd[2] = { OC_MOTORS,
-                           static_cast<uint8_t>((side != 0.0 ? 1 : 0) |
-                                     (vacuum != 0.0 ? 2 : 0) |
-                                     (main != 0.0 ? 4 : 0))
-                         };
-        return serial->send(cmd, 2);
-    }
-
     uint8_t cmd[4] = { OC_MOTORS_PWM,
                        mainMotorPower,
                        sideMotorPower,
@@ -670,46 +661,6 @@ namespace create {
     }
     else {
       CERR("[create::Create] ", "Wall sensor not supported!");
-      return false;
-    }
-  }
-
-  bool Create::isCliffLeft() const {
-    if (data->isValidPacketID(ID_CLIFF_LEFT)) {
-      return GET_DATA(ID_CLIFF_LEFT);
-    }
-    else {
-      CERR("[create::Create] ", "Cliff sensors not supported!");
-      return false;
-    }
-  }
-
-  bool Create::isCliffFrontLeft() const {
-    if (data->isValidPacketID(ID_CLIFF_FRONT_LEFT)) {
-      return GET_DATA(ID_CLIFF_FRONT_LEFT);
-    }
-    else {
-      CERR("[create::Create] ", "Cliff sensors not supported!");
-      return false;
-    }
-  }
-
-  bool Create::isCliffFrontRight() const {
-    if (data->isValidPacketID(ID_CLIFF_FRONT_RIGHT)) {
-      return GET_DATA(ID_CLIFF_FRONT_RIGHT);
-    }
-    else {
-      CERR("[create::Create] ", "Cliff sensors not supported!");
-      return false;
-    }
-  }
-
-  bool Create::isCliffRight() const {
-    if (data->isValidPacketID(ID_CLIFF_RIGHT)) {
-      return GET_DATA(ID_CLIFF_RIGHT);
-    }
-    else {
-      CERR("[create::Create] ", "Cliff sensors not supported!");
       return false;
     }
   }

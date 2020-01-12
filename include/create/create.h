@@ -333,7 +333,6 @@ namespace create {
       bool playSong(const uint8_t& songNumber) const;
 
       /* True if a left wheeldrop is detected.
-       * \return true if a left or right wheeldrop is detected, false otherwise.
        */
       bool isLeftWheel() const;
 
@@ -532,7 +531,7 @@ namespace create {
        * \return value in range [0, 4095]
        */
       uint16_t getCliffSignalFrontLeft() const;
-     
+
        /**
        * \brief Get the signal strength from the front-right light sensor.
        * \return value in range [0, 4095]
